@@ -13,82 +13,244 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 50%, #4a1942 100%);
+            background: #0a0118;
             color: #fff;
             overflow-x: hidden;
             min-height: 100vh;
         }
 
+        /* Background animado com gradiente */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: linear-gradient(135deg, #1a0a2e 0%, #2d1b4e 25%, #4a1942 50%, #2d1b4e 75%, #1a0a2e 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Estrelas melhoradas com diferentes tamanhos */
         .stars {
             position: fixed;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 0;
+            z-index: 1;
         }
 
         .star {
             position: absolute;
-            width: 2px;
-            height: 2px;
             background: #fff;
             border-radius: 50%;
             animation: twinkle 3s infinite;
         }
 
+        .star.small {
+            width: 1px;
+            height: 1px;
+        }
+
+        .star.medium {
+            width: 2px;
+            height: 2px;
+            box-shadow: 0 0 4px #fff;
+        }
+
+        .star.large {
+            width: 3px;
+            height: 3px;
+            box-shadow: 0 0 6px #fff, 0 0 10px rgba(176, 106, 255, 0.5);
+        }
+
         @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.2); }
+        }
+
+        /* Partículas flutuantes */
+        .particles {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, rgba(255, 110, 199, 0.8), transparent);
+            border-radius: 50%;
+            animation: float-particle 20s infinite;
+        }
+
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) translateX(0) scale(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px) scale(1); opacity: 0; }
+        }
+
+        /* Navbar com efeito glassmorphism */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26, 10, 46, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(176, 106, 255, 0.2);
+            padding: 15px 0;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(26, 10, 46, 0.95);
+            box-shadow: 0 8px 32px rgba(176, 106, 255, 0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #ff6ec7 0%, #b06aff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #d4a5ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #ff6ec7 0%, #b06aff 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ff6ec7;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         header {
             position: relative;
             text-align: center;
-            padding: 60px 20px 40px;
-            z-index: 1;
+            padding: 140px 20px 80px;
+            z-index: 2;
         }
 
         .moon-icon {
-            font-size: 80px;
+            font-size: 100px;
             background: linear-gradient(135deg, #ff6ec7 0%, #b06aff 50%, #7f5aff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             margin-bottom: 20px;
             animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(176, 106, 255, 0.6));
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
         }
 
         h1 {
-            font-size: 3.5em;
+            font-size: 4em;
             background: linear-gradient(135deg, #ff6ec7 0%, #b06aff 50%, #7f5aff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
-            text-shadow: 0 0 30px rgba(176, 106, 255, 0.5);
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 30px rgba(176, 106, 255, 0.5));
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(176, 106, 255, 0.4)); }
+            50% { filter: drop-shadow(0 0 40px rgba(176, 106, 255, 0.8)); }
         }
 
         .subtitle {
-            font-size: 1.3em;
+            font-size: 1.5em;
             color: #d4a5ff;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .slogan {
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-style: italic;
             color: #ff6ec7;
-            margin-top: 20px;
-            padding: 15px 30px;
+            margin-top: 30px;
+            padding: 20px 40px;
             background: rgba(255, 110, 199, 0.1);
-            border-radius: 15px;
-            border: 1px solid rgba(255, 110, 199, 0.3);
+            border-radius: 20px;
+            border: 2px solid rgba(255, 110, 199, 0.3);
             display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slogan::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 110, 199, 0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
         }
 
         .container {
@@ -96,224 +258,418 @@
             margin: 0 auto;
             padding: 20px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .section {
-            background: rgba(42, 23, 74, 0.6);
-            backdrop-filter: blur(10px);
+            background: rgba(42, 23, 74, 0.4);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(176, 106, 255, 0.3);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
+            border-radius: 25px;
+            padding: 50px;
+            margin-bottom: 40px;
             box-shadow: 0 8px 32px rgba(176, 106, 255, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(176, 106, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .section:hover::before {
+            left: 100%;
         }
 
         .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(176, 106, 255, 0.4);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(176, 106, 255, 0.4);
+            border-color: rgba(255, 110, 199, 0.5);
         }
 
         h2 {
-            font-size: 2.2em;
+            font-size: 2.5em;
             background: linear-gradient(135deg, #ff6ec7 0%, #b06aff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 25px;
+            margin-bottom: 35px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 20px;
+            position: relative;
         }
 
         .icon {
             font-size: 1em;
+            filter: drop-shadow(0 0 10px rgba(255, 110, 199, 0.6));
         }
 
         .books-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
         }
 
         .book-card {
             background: linear-gradient(135deg, rgba(74, 25, 66, 0.6) 0%, rgba(45, 27, 78, 0.6) 100%);
             border: 2px solid rgba(176, 106, 255, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s ease;
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 110, 199, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .book-card:hover::before {
+            opacity: 1;
         }
 
         .book-card:hover {
             border-color: rgba(255, 110, 199, 0.6);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 110, 199, 0.3);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(255, 110, 199, 0.4);
         }
 
         .book-card h3 {
             color: #ff6ec7;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .book-status {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(176, 106, 255, 0.2);
+            border-radius: 15px;
+            font-size: 0.85em;
+            color: #d4a5ff;
             margin-bottom: 15px;
-            font-size: 1.5em;
         }
 
         .book-links {
             display: flex;
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 20px;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
 
         .book-btn {
             flex: 1;
-            min-width: 100px;
+            min-width: 120px;
             background: linear-gradient(135deg, #ff6ec7 0%, #b06aff 100%);
             color: white;
-            padding: 12px 20px;
-            border-radius: 10px;
+            padding: 14px 24px;
+            border-radius: 12px;
             text-decoration: none;
             text-align: center;
             font-weight: bold;
             transition: all 0.3s ease;
             display: block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .book-btn:hover::before {
+            width: 300px;
+            height: 300px;
         }
 
         .book-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 20px rgba(255, 110, 199, 0.5);
+            transform: scale(1.08);
+            box-shadow: 0 8px 25px rgba(255, 110, 199, 0.6);
+        }
+
+        .book-btn.coming-soon {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: linear-gradient(135deg, #666 0%, #999 100%);
         }
 
         .social-links {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
         }
 
         .social-card {
             background: linear-gradient(135deg, rgba(255, 110, 199, 0.1) 0%, rgba(127, 90, 255, 0.1) 100%);
             border: 2px solid rgba(176, 106, 255, 0.3);
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 20px;
+            padding: 30px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-card::after {
+            content: '→';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%) translateX(10px);
+            opacity: 0;
+            font-size: 2em;
+            color: #ff6ec7;
+            transition: all 0.3s ease;
+        }
+
+        .social-card:hover::after {
+            transform: translateY(-50%) translateX(0);
+            opacity: 1;
         }
 
         .social-card:hover {
             background: linear-gradient(135deg, rgba(255, 110, 199, 0.2) 0%, rgba(127, 90, 255, 0.2) 100%);
             border-color: rgba(176, 106, 255, 0.6);
-            transform: scale(1.05);
+            transform: scale(1.08);
+            box-shadow: 0 10px 30px rgba(176, 106, 255, 0.4);
         }
 
         .social-card h3 {
-            color: #ff6ec7;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
-
-        .social-card p {
-            color: #d4a5ff;
-            font-size: 1.1em;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .project-card {
-            background: linear-gradient(135deg, rgba(74, 25, 66, 0.6) 0%, rgba(45, 27, 78, 0.6) 100%);
-            border: 2px solid rgba(176, 106, 255, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            border-color: rgba(255, 110, 199, 0.6);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 110, 199, 0.3);
-        }
-
-        .project-card h3 {
             color: #ff6ec7;
             margin-bottom: 15px;
             font-size: 1.5em;
         }
 
+        .social-card p {
+            color: #d4a5ff;
+            font-size: 1.15em;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, rgba(74, 25, 66, 0.6) 0%, rgba(45, 27, 78, 0.6) 100%);
+            border: 2px solid rgba(176, 106, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6ec7, #b06aff, #7f5aff);
+            transform: translateX(-100%);
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .project-card:hover {
+            border-color: rgba(255, 110, 199, 0.6);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 110, 199, 0.4);
+        }
+
+        .project-card h3 {
+            color: #ff6ec7;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+
         .project-card p {
             color: #d4a5ff;
-            margin-bottom: 10px;
-            line-height: 1.6;
+            margin-bottom: 12px;
+            line-height: 1.7;
         }
 
         .link {
             color: #b06aff;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
             display: inline-block;
-            margin-top: 5px;
+            margin-top: 8px;
+            position: relative;
+        }
+
+        .link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ff6ec7;
+            transition: width 0.3s ease;
         }
 
         .link:hover {
             color: #ff6ec7;
-            text-decoration: underline;
+            transform: translateX(5px);
+        }
+
+        .link:hover::after {
+            width: 100%;
         }
 
         .yume-section {
-            background: linear-gradient(135deg, rgba(255, 110, 199, 0.1) 0%, rgba(127, 90, 255, 0.1) 100%);
-            border: 2px solid rgba(255, 110, 199, 0.4);
+            background: linear-gradient(135deg, rgba(255, 110, 199, 0.15) 0%, rgba(127, 90, 255, 0.15) 100%);
+            border: 2px solid rgba(255, 110, 199, 0.5);
         }
 
         .yume-links {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
         }
 
         .yume-link {
             background: rgba(176, 106, 255, 0.2);
-            padding: 15px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 15px;
             text-align: center;
             border: 1px solid rgba(176, 106, 255, 0.3);
             transition: all 0.3s ease;
         }
 
         .yume-link:hover {
-            background: rgba(255, 110, 199, 0.2);
-            border-color: rgba(255, 110, 199, 0.5);
+            background: rgba(255, 110, 199, 0.25);
+            border-color: rgba(255, 110, 199, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(255, 110, 199, 0.3);
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
             color: #d4a5ff;
             position: relative;
-            z-index: 1;
+            z-index: 2;
+            background: rgba(26, 10, 46, 0.4);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(176, 106, 255, 0.2);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .footer-social a {
+            font-size: 2em;
+            transition: all 0.3s ease;
+            filter: grayscale(0);
+        }
+
+        .footer-social a:hover {
+            transform: scale(1.2) rotate(5deg);
+            filter: drop-shadow(0 0 10px rgba(255, 110, 199, 0.8));
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff6ec7 0%, #b06aff 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 99;
+            box-shadow: 0 4px 15px rgba(176, 106, 255, 0.4);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 110, 199, 0.6);
         }
 
         @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
             h1 {
                 font-size: 2.5em;
             }
 
             .section {
-                padding: 25px;
+                padding: 30px 20px;
             }
 
             h2 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
 
             .slogan {
-                font-size: 1em;
-                padding: 12px 20px;
+                font-size: 1.1em;
+                padding: 15px 25px;
             }
 
             .book-links {
@@ -323,153 +679,378 @@
             .book-btn {
                 min-width: 100%;
             }
+
+            .books-grid,
+            .projects-grid,
+            .social-links,
+            .yume-links {
+                grid-template-columns: 1fr;
+            }
         }
+
+        /* Loading animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
     </style>
 </head>
 <body>
+    <div class="animated-bg"></div>
     <div class="stars" id="stars"></div>
+    <div class="particles" id="particles"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span>🌙</span>
+                <span>Ren The Writer</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#obras">Obras</a></li>
+                <li><a href="#redes">Redes</a></li>
+                <li><a href="#marcas">Marcas</a></li>
+                <li><a href="#studio">Studio</a></li>
+                <li><a href="#yume">Yume</a></li>
+            </ul>
+        </div>
+    </nav>
 
     <header>
         <div class="moon-icon">🌙</div>
         <h1>Ren The Writer</h1>
-        <p class="subtitle">Bem Vindo ao Universo Tsukiyo</p>
+        <p class="subtitle">Bem-vindo ao Universo Tsukiyo</p>
         <div class="slogan">"Histórias que queimam devagar, mas ficam para sempre."</div>
     </header>
 
     <div class="container">
-        <section class="section">
-            <h2><span class="icon">📖</span> Obras</h2>
+        <section class="section" id="obras">
+            <h2><span class="icon">📖</span> Obras Publicadas</h2>
             <div class="books-grid">
                 <div class="book-card">
+                    <span class="book-status">✨ Disponível</span>
                     <h3>Abunai Aisuru</h3>
+                    <p style="color: #d4a5ff; margin-bottom: 15px;">Romance intenso que explora os limites do amor e da obsessão.</p>
                     <div class="book-links">
-                        <a href="https://a.co/d/39ImMTU" class="book-btn" target="_blank">Amazon</a>
-                        <a href="https://www.wattpad.com/story/352587141" class="book-btn" target="_blank">Wattpad</a>
+                        <a href="https://a.co/d/39ImMTU" class="book-btn" target="_blank">📚 Amazon</a>
+                        <a href="https://www.wattpad.com/story/352587141" class="book-btn" target="_blank">📖 Wattpad</a>
                     </div>
                 </div>
                 <div class="book-card">
+                    <span class="book-status">✨ Disponível</span>
                     <h3>Abunai Aisuru - Arco 2</h3>
+                    <p style="color: #d4a5ff; margin-bottom: 15px;">A continuação emocionante da saga.</p>
                     <div class="book-links">
-                        <a href="https://a.co/d/838oTJx" class="book-btn" target="_blank">Amazon</a>
+                        <a href="https://a.co/d/838oTJx" class="book-btn" target="_blank">📚 Amazon</a>
                     </div>
                 </div>
                 <div class="book-card">
+                    <span class="book-status">✨ Disponível</span>
                     <h3>Por Favor, Me Note</h3>
+                    <p style="color: #d4a5ff; margin-bottom: 15px;">Uma história tocante sobre amor não correspondido e superação.</p>
                     <div class="book-links">
-                        <a href="https://a.co/d/72OJnpq" class="book-btn" target="_blank">Amazon</a>
-                        <a href="https://www.wattpad.com/story/402502894" class="book-btn" target="_blank">Wattpad</a>
+                        <a href="https://a.co/d/72OJnpq" class="book-btn" target="_blank">📚 Amazon</a>
+                        <a href="https://www.wattpad.com/story/402502894" class="book-btn" target="_blank">📖 Wattpad</a>
                     </div>
                 </div>
                 <div class="book-card">
+                    <span class="book-status">✨ Disponível</span>
                     <h3>Married at 16</h3>
+                    <p style="color: #d4a5ff; margin-bottom: 15px;">Um relato emocionante sobre amadurecimento precoce.</p>
                     <div class="book-links">
-                        <a href="https://www.wattpad.com/story/353888895" class="book-btn" target="_blank">Wattpad</a>
+                        <a href="https://www.wattpad.com/story/353888895" class="book-btn" target="_blank">📖 Wattpad</a>
                     </div>
                 </div>
                 <div class="book-card">
+                    <span class="book-status">✨ Disponível</span>
                     <h3>Emilly: Além do Horizonte</h3>
+                    <p style="color: #d4a5ff; margin-bottom: 15px;">Uma aventura épica além dos limites da realidade.</p>
                     <div class="book-links">
-                        <a href="https://a.co/d/1XdSUt3" class="book-btn" target="_blank">Amazon</a>
-                        <a href="https://www.wattpad.com/story/359037204" class="book-btn" target="_blank">Wattpad</a>
+                        <a href="https://a.co/d/1XdSUt3" class="book-btn" target="_blank">📚 Amazon</a>
+                        <a href="https://www.wattpad.com/story/359037204" class="book-btn" target="_blank">📖 Wattpad</a>
                     </div>
                 </div>
                 <div class="book-card">
+                    <span class="book-status">✨ Disponível</span>
                     <h3>O Diário de Felipe</h3>
+                    <p style="color: #d4a5ff; margin-bottom: 15px;">Memórias íntimas que revelam a alma humana.</p>
                     <div class="book-links">
-                        <a href="https://www.wattpad.com/story/328285785" class="book-btn" target="_blank">Wattpad</a>
+                        <a href="https://www.wattpad.com/story/328285785" class="book-btn" target="_blank">📖 Wattpad</a>
                     </div>
                 </div>
                 <div class="book-card">
+                    <span class="book-status">✨ Disponível</span>
                     <h3>Watashi No Ai Hana</h3>
+                    <p style="color: #d4a5ff; margin-bottom: 15px;">Uma flor de amor no jardim da vida.</p>
                     <div class="book-links">
-                        <a href="https://a.co/d/2RnyHsJ" class="book-btn" target="_blank">Amazon</a>
-                        <a href="https://www.wattpad.com/story/336562646" class="book-btn" target="_blank">Wattpad</a>
+                        <a href="https://a.co/d/2RnyHsJ" class="book-btn" target="_blank">📚 Amazon</a>
+                        <a href="https://www.wattpad.com/story/336562646" class="book-btn" target="_blank">📖 Wattpad</a>
                     </div>
                 </div>
                 <div class="book-card">
+                    <span class="book-status">🔜 Em Breve</span>
                     <h3>Kiss Her, Not Me</h3>
+                    <p style="color: #d4a5ff; margin-bottom: 15px;">Em desenvolvimento. Aguarde novidades!</p>
                     <div class="book-links">
-                        <span class="book-btn" style="opacity: 0.5; cursor: not-allowed;">Em breve</span>
+                        <span class="book-btn coming-soon">⏳ Em breve</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="redes">
             <h2><span class="icon">📱</span> Redes Sociais</h2>
+            <p style="color: #d4a5ff; margin-bottom: 20px; text-align: center;">Conecte-se comigo e acompanhe todas as novidades do universo literário!</p>
             <div class="social-links">
                 <div class="social-card" onclick="window.open('https://instagram.com/tsukiyo.ren', '_blank')">
+                    <div style="font-size: 3em; margin-bottom: 10px;">📸</div>
                     <h3>Instagram</h3>
                     <p>@tsukiyo.ren</p>
+                    <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Bastidores, lançamentos e muito mais</p>
                 </div>
                 <div class="social-card" onclick="window.open('https://facebook.com/RenTheWriter', '_blank')">
+                    <div style="font-size: 3em; margin-bottom: 10px;">👥</div>
                     <h3>Facebook</h3>
                     <p>Ren The Writer</p>
+                    <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Comunidade de leitores apaixonados</p>
                 </div>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="marcas">
             <h2><span class="icon">📚</span> Marcas da Autoria</h2>
+            <p style="color: #d4a5ff; margin-bottom: 20px; text-align: center;">Projetos especiais que expandem o universo literário</p>
             <div class="social-links">
                 <div class="social-card" onclick="window.open('https://ig.me/j/AbYAHRZS0AgKx6Xi/', '_blank')">
+                    <div style="font-size: 3em; margin-bottom: 10px;">☕</div>
                     <h3>Café e Páginas</h3>
-                    <p>Clube do Livro</p>
+                    <p>Clube do Livro Exclusivo</p>
+                    <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Discussões literárias e encontros virtuais</p>
                 </div>
                 <div class="social-card" onclick="window.open('https://instagram.com/kaoruescritor', '_blank')">
+                    <div style="font-size: 3em; margin-bottom: 10px;">✍️</div>
                     <h3>Kaoru Writer</h3>
-                    <p>Autor</p>
+                    <p>Perfil Autoral</p>
+                    <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.8;">Dicas de escrita e inspiração criativa</p>
                 </div>
             </div>
         </section>
 
-        <section class="section">
+        <section class="section" id="studio">
             <h2><span class="icon">🎨</span> Studio Tsukiyo Platforms</h2>
+            <p style="color: #d4a5ff; margin-bottom: 20px; text-align: center;">Criações audiovisuais e conteúdo multimídia do universo Tsukiyo</p>
             <div class="projects-grid">
                 <div class="project-card">
+                    <div style="font-size: 2.5em; margin-bottom: 15px;">🎬</div>
                     <h3>ORPHEO Platforms</h3>
-                    <p><a class="link" href="https://instagram.com/orpheostudio" target="_blank">@orpheostudio</a></p>
+                    <p>Studio de criação de conteúdo audiovisual e multimídia.</p>
+                    <p><a class="link" href="https://instagram.com/orpheostudio" target="_blank">📸 @orpheostudio →</a></p>
                 </div>
                 <div class="project-card">
+                    <div style="font-size: 2.5em; margin-bottom: 15px;">🎭</div>
                     <h3>YumeRoll</h3>
-                    <p>Submarca ORPHEO</p>
-                    <p><a class="link" href="https://instagram.com/yumerolloficial" target="_blank">@yumerolloficial</a></p>
-                    <p><a class="link" href="https://tiktok.com/@yumerollanimes" target="_blank">@yumerollanimes (TikTok)</a></p>
+                    <p><strong>Submarca ORPHEO</strong></p>
+                    <p>Conteúdo exclusivo sobre anime, mangá e cultura pop japonesa.</p>
+                    <p><a class="link" href="https://instagram.com/yumerolloficial" target="_blank">📸 @yumerolloficial →</a></p>
+                    <p><a class="link" href="https://tiktok.com/@yumerollanimes" target="_blank">🎵 @yumerollanimes (TikTok) →</a></p>
                 </div>
             </div>
         </section>
 
-        <section class="section yume-section">
+        <section class="section yume-section" id="yume">
             <h2><span class="icon">🤖</span> Projeto Assistente: Yume</h2>
+            <p style="color: #d4a5ff; margin-bottom: 20px; text-align: center;">Sua assistente virtual inteligente - Inovação e tecnologia a serviço da criatividade</p>
             <div class="yume-links">
                 <div class="yume-link">
-                    <a class="link" href="https://yume.orpheostudio.com.br" target="_blank">Acesse Yume</a>
+                    <div style="font-size: 2em; margin-bottom: 10px;">💫</div>
+                    <a class="link" href="https://yume.orpheostudio.com.br" target="_blank" style="font-size: 1.1em; font-weight: bold;">Acesse Yume</a>
                 </div>
                 <div class="yume-link">
-                    <a class="link" href="https://termos.orpheostudio.com.br" target="_blank">Termos de Uso</a>
+                    <div style="font-size: 2em; margin-bottom: 10px;">📜</div>
+                    <a class="link" href="https://termos.orpheostudio.com.br" target="_blank" style="font-size: 1.1em; font-weight: bold;">Termos de Uso</a>
                 </div>
                 <div class="yume-link">
-                    <a class="link" href="https://studio.orpheostudio.com.br" target="_blank">Site Oficial</a>
+                    <div style="font-size: 2em; margin-bottom: 10px;">🏢</div>
+                    <a class="link" href="https://studio.orpheostudio.com.br" target="_blank" style="font-size: 1.1em; font-weight: bold;">Site Oficial</a>
                 </div>
             </div>
         </section>
     </div>
 
     <footer>
-        <p>🌙 Ren The Writer © 2025 | Todos os direitos reservados a Ren Tsukiyo</p>
+        <div class="footer-content">
+            <div class="footer-social">
+                <a href="https://instagram.com/tsukiyo.ren" target="_blank" title="Instagram">📸</a>
+                <a href="https://facebook.com/RenTheWriter" target="_blank" title="Facebook">👥</a>
+                <a href="https://www.wattpad.com/user/RenTheWriter" target="_blank" title="Wattpad">📖</a>
+            </div>
+            <p style="font-size: 1.2em; margin-bottom: 10px;">🌙 <strong>Ren The Writer</strong> © 2025</p>
+            <p>Todos os direitos reservados a Ren Tsukiyo</p>
+            <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">Feito com 💜 e muita criatividade</p>
+        </div>
     </footer>
 
+    <div class="scroll-top" id="scrollTop" onclick="scrollToTop()">
+        <span style="font-size: 1.5em;">↑</span>
+    </div>
+
     <script>
-        // Criar estrelas animadas
+        // Criar estrelas animadas com diferentes tamanhos
         const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 150; i++) {
             const star = document.createElement('div');
-            star.className = 'star';
+            const sizeClass = Math.random() > 0.7 ? 'large' : (Math.random() > 0.5 ? 'medium' : 'small');
+            star.className = `star ${sizeClass}`;
             star.style.left = Math.random() * 100 + '%';
             star.style.top = Math.random() * 100 + '%';
             star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (2 + Math.random() * 2) + 's';
             starsContainer.appendChild(star);
         }
+
+        // Criar partículas flutuantes
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+            particlesContainer.appendChild(particle);
+        }
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Smooth scroll para links da navbar
+        document.querySelectorAll('.nav-links a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    const offsetTop = targetSection.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animação de entrada dos cards ao scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar todos os cards
+        document.querySelectorAll('.book-card, .social-card, .project-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+
+        // Easter egg: Clique triplo no logo para surpresa
+        let clickCount = 0;
+        let clickTimer;
+        document.querySelector('.moon-icon').addEventListener('click', () => {
+            clickCount++;
+            clearTimeout(clickTimer);
+            
+            if (clickCount === 3) {
+                // Criar uma chuva de emojis
+                for (let i = 0; i < 30; i++) {
+                    setTimeout(() => {
+                        const emoji = document.createElement('div');
+                        emoji.innerHTML = ['🌙', '✨', '💜', '📖', '🎨'][Math.floor(Math.random() * 5)];
+                        emoji.style.position = 'fixed';
+                        emoji.style.left = Math.random() * 100 + '%';
+                        emoji.style.top = '-50px';
+                        emoji.style.fontSize = '2em';
+                        emoji.style.zIndex = '1000';
+                        emoji.style.pointerEvents = 'none';
+                        emoji.style.transition = 'all 3s ease-out';
+                        document.body.appendChild(emoji);
+                        
+                        setTimeout(() => {
+                            emoji.style.top = '100vh';
+                            emoji.style.transform = 'rotate(360deg)';
+                            emoji.style.opacity = '0';
+                        }, 10);
+                        
+                        setTimeout(() => {
+                            emoji.remove();
+                        }, 3000);
+                    }, i * 100);
+                }
+                clickCount = 0;
+            }
+            
+            clickTimer = setTimeout(() => {
+                clickCount = 0;
+            }, 1000);
+        });
+
+        // Efeito parallax suave no header
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const header = document.querySelector('header');
+            if (header && scrolled < window.innerHeight) {
+                header.style.transform = `translateY(${scrolled * 0.5}px)`;
+                header.style.opacity = 1 - (scrolled / 500);
+            }
+        });
     </script>
 </body>
 </html>
